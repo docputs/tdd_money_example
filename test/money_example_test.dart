@@ -13,6 +13,8 @@ void main() {
   test('equality', () {
     expect(Dollar(5).equals(Dollar(5)), isTrue);
     expect(Dollar(5).equals(Dollar(6)), isFalse);
+    expect(Franc(5).equals(Franc(5)), isTrue);
+    expect(Franc(5).equals(Franc(6)), isFalse);
   });
 
   test('franc multiplication', () {
