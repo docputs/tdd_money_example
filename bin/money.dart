@@ -8,14 +8,17 @@ abstract class Money {
   int get amount => _amount;
   final int _amount;
 
-  Money(this._amount);
+  String get currency => _currency;
+  final String _currency;
+
+  Money(this._amount, this._currency);
 
   factory Money.dollar(int amount) {
-    return Dollar(amount);
+    return Dollar(amount, 'USD');
   }
 
   factory Money.franc(int amount) {
-    return Franc(amount);
+    return Franc(amount, 'CHF');
   }
 
   Money times(int multiplier);
