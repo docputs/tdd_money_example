@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'dollar.dart';
 import 'franc.dart';
 
-abstract class Money {
+class Money {
   @protected
   int get amount => _amount;
   final int _amount;
@@ -21,10 +21,12 @@ abstract class Money {
     return Franc(amount, 'CHF');
   }
 
-  Money times(int multiplier);
+  Money times(int multiplier) {
+    return Money(amount * multiplier, currency);
+  }
 
   bool equals(Object object) {
     Money money = object as Money;
-    return amount == money.amount && runtimeType == money.runtimeType;
+    return amount == money.amount && currency == money.currency;
   }
 }

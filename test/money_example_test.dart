@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 
+import '../bin/franc.dart';
 import '../bin/money.dart';
 
 void main() {
@@ -26,5 +27,9 @@ void main() {
   test('currency', () {
     expect(Money.dollar(1).currency, 'USD');
     expect(Money.franc(1).currency, 'CHF');
+  });
+
+  test('different class equality', () {
+    expect(Money(10, 'CHF').equals(Franc(10, 'CHF')), isTrue);
   });
 }

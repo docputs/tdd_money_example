@@ -10,7 +10,7 @@
 - ~~5 CHF * 2 = 10 CHF~~
 - Dollar/Franc duplication
 - ~~Common equals~~
-- Common times
+- ~~Common times~~
 - ~~Compare Francs to Dollars~~
 - ~~Currency?~~
 - Delete testFrancMultiplication?
