@@ -1,5 +1,7 @@
 import 'package:test/test.dart';
 
+import '../bin/bank.dart';
+import '../bin/expression.dart';
 import '../bin/money.dart';
 
 void main() {
@@ -18,5 +20,13 @@ void main() {
   test('currency', () {
     expect(Money.dollar(1).currency, 'USD');
     expect(Money.franc(1).currency, 'CHF');
+  });
+
+  test('simple addition', () {
+    Money five = Money.dollar(5);
+    Expression sum = five.plus(five);
+    Bank bank = Bank();
+    Money reduced = bank.reduce(sum, 'USD');
+    expect(reduced.equals(Money.dollar(10)), isTrue);
   });
 }
