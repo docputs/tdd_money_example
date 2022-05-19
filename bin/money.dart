@@ -1,9 +1,6 @@
-import 'package:meta/meta.dart';
-
 import 'expression.dart';
 
 class Money implements Expression {
-  @protected
   int get amount => _amount;
   final int _amount;
 
