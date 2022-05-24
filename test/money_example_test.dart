@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 import '../bin/bank.dart';
 import '../bin/expression.dart';
 import '../bin/money.dart';
+import '../bin/sum.dart';
 
 void main() {
   test('multiplication', () {
@@ -28,5 +29,26 @@ void main() {
     Bank bank = Bank();
     Money reduced = bank.reduce(sum, 'USD');
     expect(reduced.equals(Money.dollar(10)), isTrue);
+  });
+
+  test('plus returns sum', () {
+    Money five = Money.dollar(5);
+    Expression result = five.plus(five);
+    Sum sum = result as Sum;
+    expect(five, sum.augend);
+    expect(five, sum.addend);
+  });
+
+  test('reduce sum', () {
+    Expression sum = Sum(Money.dollar(3), Money.dollar(4));
+    Bank bank = Bank();
+    Money result = bank.reduce(sum, 'USD');
+    expect(result.equals(Money.dollar(7)), isTrue);
+  });
+
+  test('reduce money', () {
+    Bank bank = Bank();
+    Money result = bank.reduce(Money.dollar(1), 'USD');
+    expect(result.equals(Money.dollar(1)), isTrue);
   });
 }

@@ -1,4 +1,5 @@
 import 'expression.dart';
+import 'sum.dart';
 
 class Money implements Expression {
   int get amount => _amount;
@@ -27,6 +28,11 @@ class Money implements Expression {
   }
 
   Expression plus(Money addend) {
-    return Money(_amount + addend.amount, _currency);
+    return Sum(this, addend);
+  }
+
+  @override
+  Money reduce(String to) {
+    return this;
   }
 }
