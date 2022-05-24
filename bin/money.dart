@@ -1,3 +1,4 @@
+import 'bank.dart';
 import 'expression.dart';
 import 'sum.dart';
 
@@ -32,7 +33,8 @@ class Money implements Expression {
   }
 
   @override
-  Money reduce(String to) {
-    return this;
+  Money reduce(Bank bank, String to) {
+    int rate = bank.rate(currency, to);
+    return Money(_amount ~/ rate, to);
   }
 }
