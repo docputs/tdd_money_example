@@ -19,7 +19,7 @@ class Money implements Expression {
     return Money(amount, 'CHF');
   }
 
-  Money times(int multiplier) {
+  Expression times(int multiplier) {
     return Money(amount * multiplier, currency);
   }
 
@@ -28,7 +28,8 @@ class Money implements Expression {
     return amount == money.amount && currency == money.currency;
   }
 
-  Expression plus(Money addend) {
+  @override
+  Expression plus(Expression addend) {
     return Sum(this, addend);
   }
 

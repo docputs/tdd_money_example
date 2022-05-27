@@ -8,8 +8,8 @@ import '../bin/sum.dart';
 void main() {
   test('multiplication', () {
     Money five = Money.dollar(5);
-    expect(five.times(2).equals(Money.dollar(10)), isTrue);
-    expect(five.times(3).equals(Money.dollar(15)), isTrue);
+    expect((five.times(2) as Money).equals(Money.dollar(10)), isTrue);
+    expect((five.times(3) as Money).equals(Money.dollar(15)), isTrue);
   });
 
   test('equality', () {
@@ -61,5 +61,14 @@ void main() {
 
   test('identity rate', () {
     expect(Bank().rate('USD', 'USD'), 1);
+  });
+
+  test('mixed addition', () {
+    Expression fiveBucks = Money.dollar(5);
+    Expression tenFrancs = Money.franc(10);
+    Bank bank = Bank();
+    bank.addRate('CHF', 'USD', 2);
+    Money result = bank.reduce(fiveBucks.plus(tenFrancs), 'USD');
+    expect(result.equals(Money.dollar(10)), isTrue);
   });
 }
