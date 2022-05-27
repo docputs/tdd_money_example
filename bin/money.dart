@@ -19,6 +19,7 @@ class Money implements Expression {
     return Money(amount, 'CHF');
   }
 
+  @override
   Expression times(int multiplier) {
     return Money(amount * multiplier, currency);
   }
