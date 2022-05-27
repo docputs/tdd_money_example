@@ -8,14 +8,14 @@ import '../bin/sum.dart';
 void main() {
   test('multiplication', () {
     Money five = Money.dollar(5);
-    expect((five.times(2) as Money).equals(Money.dollar(10)), isTrue);
-    expect((five.times(3) as Money).equals(Money.dollar(15)), isTrue);
+    expect(five.times(2), Money.dollar(10));
+    expect(five.times(3), Money.dollar(15));
   });
 
   test('equality', () {
-    expect(Money.dollar(5).equals(Money.dollar(5)), isTrue);
-    expect(Money.dollar(5).equals(Money.dollar(6)), isFalse);
-    expect(Money.franc(5).equals(Money.dollar(5)), isFalse);
+    expect(Money.dollar(5), Money.dollar(5));
+    expect(Money.dollar(5), isNot(Money.dollar(6)));
+    expect(Money.franc(5), isNot(Money.dollar(5)));
   });
 
   test('currency', () {
@@ -28,7 +28,7 @@ void main() {
     Expression sum = five.plus(five);
     Bank bank = Bank();
     Money reduced = bank.reduce(sum, 'USD');
-    expect(reduced.equals(Money.dollar(10)), isTrue);
+    expect(reduced, Money.dollar(10));
   });
 
   test('plus returns sum', () {
@@ -43,20 +43,20 @@ void main() {
     Expression sum = Sum(Money.dollar(3), Money.dollar(4));
     Bank bank = Bank();
     Money result = bank.reduce(sum, 'USD');
-    expect(result.equals(Money.dollar(7)), isTrue);
+    expect(result, Money.dollar(7));
   });
 
   test('reduce money', () {
     Bank bank = Bank();
     Money result = bank.reduce(Money.dollar(1), 'USD');
-    expect(result.equals(Money.dollar(1)), isTrue);
+    expect(result, Money.dollar(1));
   });
 
   test('reduce money different currency', () {
     Bank bank = Bank();
     bank.addRate('CHF', 'USD', 2);
     Money result = bank.reduce(Money.franc(2), 'USD');
-    expect(result.equals(Money.dollar(1)), isTrue);
+    expect(result, Money.dollar(1));
   });
 
   test('identity rate', () {
@@ -69,7 +69,7 @@ void main() {
     Bank bank = Bank();
     bank.addRate('CHF', 'USD', 2);
     Money result = bank.reduce(fiveBucks.plus(tenFrancs), 'USD');
-    expect(result.equals(Money.dollar(10)), isTrue);
+    expect(result, Money.dollar(10));
   });
 
   test('sum plus money', () {
@@ -79,7 +79,7 @@ void main() {
     bank.addRate('CHF', 'USD', 2);
     Expression sum = Sum(fiveBucks, tenFrancs).plus(fiveBucks);
     Money result = bank.reduce(sum, 'USD');
-    expect(result.equals(Money.dollar(15)), isTrue);
+    expect(result, Money.dollar(15));
   });
 
   test('sum times', () {
@@ -89,6 +89,6 @@ void main() {
     bank.addRate('CHF', 'USD', 2);
     Expression sum = Sum(fiveBucks, tenFrancs).times(2);
     Money result = bank.reduce(sum, 'USD');
-    expect(result.equals(Money.dollar(20)), isTrue);
+    expect(result, Money.dollar(20));
   });
 }

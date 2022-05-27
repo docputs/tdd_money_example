@@ -24,11 +24,6 @@ class Money implements Expression {
     return Money(amount * multiplier, currency);
   }
 
-  bool equals(Object object) {
-    Money money = object as Money;
-    return amount == money.amount && currency == money.currency;
-  }
-
   @override
   Expression plus(Expression addend) {
     return Sum(this, addend);
@@ -39,4 +34,15 @@ class Money implements Expression {
     int rate = bank.rate(currency, to);
     return Money(_amount ~/ rate, to);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Money &&
+        other._amount == _amount &&
+        other._currency == _currency;
+  }
+
+  @override
+  int get hashCode => _amount.hashCode ^ _currency.hashCode;
 }
